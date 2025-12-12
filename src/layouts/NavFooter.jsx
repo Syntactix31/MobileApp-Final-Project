@@ -5,7 +5,9 @@ export default function NavFooter({ navigation }) {
   return (
     <View style={styles.footer}>
       <View style={styles.navContainer}>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity 
+          style={styles.navItem} 
+          onPress={() => navigation.navigate('Home')}>
           <Image source={require('../assets/img/song_tab_nav.png')} style={styles.navIcon} />
         </TouchableOpacity>
         

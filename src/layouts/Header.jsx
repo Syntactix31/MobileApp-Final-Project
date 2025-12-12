@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { neonBlueText, headerTitle, header } from '../layouts/MainLayout';
 
-export default function Header({ title = 'Piano Tiles', onProfilePress }) {
+export default function Header({ title, onProfilePress }) {
   return (
     <View style={[header, styles.container]}>
       <Text style={[neonBlueText, headerTitle, styles.title]}>{title}</Text>

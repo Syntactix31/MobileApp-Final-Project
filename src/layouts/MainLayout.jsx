@@ -4,11 +4,11 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 export default function MainLayout({ children }) {
   return (
     <SafeAreaView style={styles.body}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Text style={[styles.neonBlueText, styles.headerTitle]}>
           Rhythm Tiles
         </Text>
-      </View>
+      </View> */}
 
       <View style={styles.mainContainer}>
 
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: 100,
     height: 100,
-    marginBottom: 16,
+    marginBottom: 20,
   },
 
   imagePlaceholder: {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     position: 'absolute',
     top: 2,
-    right: -10,
+    right: -16,
   },
 
   content: {

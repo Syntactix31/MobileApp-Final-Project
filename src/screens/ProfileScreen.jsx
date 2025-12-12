@@ -2,10 +2,35 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function ProfileScreen() {
+import MainLayout from '../layouts/MainLayout';
+import NavFooter from '../layouts/NavFooter';
+
+export default function ProfileScreen({ navigation }) {
+
+  // Move profile to middle of header and remove title
+
+
+
+
+  
+
+
+
+
+
   return (
-    <View style={{ flex: 1, backgroundColor: 'black', justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ color: 'white' }}>Profile Screen</Text>
-    </View>
+    <MainLayout>
+      <View style={{ flex: 1 }}>
+        <Text>
+          Profile Stuff
+        </Text>
+
+
+        <NavFooter navigation={navigation} />
+      </View>
+    </MainLayout>
+
   );
 }
+
+

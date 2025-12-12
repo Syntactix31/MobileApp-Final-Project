@@ -6,8 +6,9 @@ export default function SongItem({ song, isLiked, isSaved, onLike, onSave, onPre
   return (
     <TouchableOpacity style={styles.songContainer} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.artworkContainer}>
-        <View style={styles.imagePlaceholder} />
         <View style={styles.cdImagePlaceholder} />
+        <View style={styles.imagePlaceholder} />
+        
       </View>
 
       <View style={styles.songInfo}>
@@ -46,7 +47,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#000000',
     padding: 20,
-    paddingLeft: 28,
+    paddingLeft: 16,
     marginBottom: 12,
     borderRadius: 12,
     shadowColor: '#04D9FF',
@@ -60,7 +61,7 @@ const styles = {
     position: 'relative',
     width: 80,
     height: 80,
-    marginRight: 16,
+    marginRight: 20,
   },
 
   imagePlaceholder: {
@@ -70,6 +71,7 @@ const styles = {
     position: 'absolute',
     top: 0,
     left: 0,
+    zIndex: 1,
   },
 
   cdImagePlaceholder: {
@@ -79,12 +81,12 @@ const styles = {
     borderRadius: 37.5,
     position: 'absolute',
     top: 2,
-    right: -10,
+    right: -16,
   },
 
   songInfo: {
     flex: 1,
-    paddingTop: 8,
+    marginLeft: 12,
   },
 
   songTitle: {

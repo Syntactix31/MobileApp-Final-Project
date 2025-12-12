@@ -33,3 +33,12 @@ export default function App() {
   );
 }
 
+
+
+
+
+
+
+// ********* NOTE: FIX ESLINT NO INLINE STYLING IN CONFIG FILE TO DISABLED **************\\
+
+

@@ -35,6 +35,7 @@ export default function HomeScreen({ navigation }) {
 
   const handleProfilePress = () => {
     console.log('Profile pressed');
+    navigation.navigate('Profile');
 
   };
 
@@ -62,7 +63,7 @@ export default function HomeScreen({ navigation }) {
     <MainLayout>
       <View style={{ flex: 1 }}>
         <Header 
-          title="Rhythm Tiles" 
+          title="Piano Tiles" 
           onProfilePress={handleProfilePress}
         />
 

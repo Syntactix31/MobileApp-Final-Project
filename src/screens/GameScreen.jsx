@@ -1,10 +1,38 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function GameScreen() {
+import MainLayout from '../layouts/MainLayout';
+import Header from '../layouts/Header';
+import NavFooter from '../layouts/NavFooter';
+
+export default function GameScreen({ navigation }) {
+
+  const handleProfilePress = () => {
+    console.log('Profile pressed');
+    navigation.navigate('Profile');
+
+  };
+
+
+
+
+
+
+
+
   return (
-    <View style={{ flex: 1, backgroundColor: 'black', justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ color: 'white' }}>Game Screen</Text>
-    </View>
+    <MainLayout>
+      <View style={{ flex: 1 }}>
+        <Header 
+          title="Rhythm Tiles" 
+          onProfilePress={handleProfilePress}
+        />
+
+
+        <NavFooter navigation={navigation} />
+      </View>
+    </MainLayout>
+
   );
 }
