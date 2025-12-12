@@ -1,0 +1,32 @@
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import MainLayout from '../layouts/MainLayout';
+
+
+
+
+
+export default function SavedSongsScreen() {
+  const currentDate = new Date().toLocaleDateString();
+
+  return (
+    <MainLayout>
+      <View style={styles.content}>
+        <Text style={styles.title}>ToDo App</Text>
+        <Text style={styles.text}>Developer: Levi M</Text>
+        <Text style={styles.text}>Date: {currentDate}</Text>
+        <Button
+          title="Go to Home"
+          onPress={() => navigation.navigate('Home')}
+        />
+      </View>
+    </MainLayout>
+  );
+}
+
+const styles = StyleSheet.create({
+  content: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 },
+  text: { fontSize: 16, marginBottom: 10 },
+});
+

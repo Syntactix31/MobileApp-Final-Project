@@ -127,7 +127,7 @@ function gameOver() {
   gameRunning = false;
   stopTimer();
   cancelAnimationFrame(animationFrame);
-  alert(`🎵 Game Over 🎵\nFinal Score: ${score}\nTime: ${timeElapsed}s`);
+  // alert(`🎵 Game Over 🎵\nFinal Score: ${score}\nTime: ${timeElapsed}s`);
 }
 
 function startGame() {
