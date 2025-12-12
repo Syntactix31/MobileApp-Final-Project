@@ -4,15 +4,13 @@ import MainLayout from '../layouts/MainLayout';
 
 
 
-
-
 export default function SavedSongsScreen({ navigation }) {
   const currentDate = new Date().toLocaleDateString();
 
   return (
     <MainLayout>
       <View style={styles.content}>
-        <Text style={styles.title}>Rythm Tiles</Text>
+        <Text style={styles.title}>Rhythm Tiles</Text>
         <Text style={styles.text}>Developers: Levi M, Theo S, Jiro R, Justice M</Text>
         <Text style={styles.text}>Date: {currentDate}</Text>
         <Button

@@ -21,9 +21,9 @@ export default function MainLayout({ children }) {
         <View style={styles.content}>{children}</View> */}
       </View>
 
-      <View style={styles.footer}>
+      {/* <View style={styles.footer}>
         <Text style={styles.footerText}>Footer content</Text>
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };
@@ -36,12 +36,11 @@ const styles = StyleSheet.create({
 
   neonBlueBox: {
     backgroundColor: '#000000',
-    // React Native approximation of multi-layer neon glow
     shadowColor: '#04D9FF',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
     shadowRadius: 20,
-    elevation: 20, // Android glow approximation
+    elevation: 20,
   },
 
   neonBlueText: {
@@ -82,7 +81,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     position: 'relative',
-    padding: 16,
+    padding: 0,
   },
 
   artworkContainer: {

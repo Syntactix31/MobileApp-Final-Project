@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { neonBlueText, headerTitle, header } from '../layouts/MainLayout';
 
 export default function Header({ title = 'Piano Tiles', onProfilePress }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+    <View style={[header, styles.container]}>
+      <Text style={[neonBlueText, headerTitle, styles.title]}>{title}</Text>
       <TouchableOpacity onPress={onProfilePress}>
         <Image 
           source={require('../assets/img/user.png')} 
@@ -15,7 +16,7 @@ export default function Header({ title = 'Piano Tiles', onProfilePress }) {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -26,11 +27,11 @@ const styles = {
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
   },
   profileIcon: {
     width: 50,
     height: 50,
   },
-};
+});
+
+

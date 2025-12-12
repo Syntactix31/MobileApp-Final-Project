@@ -60,14 +60,12 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <MainLayout>
-      <View style={{ flex: 1, paddingTop: 20 }}>
-        {/* Header */}
+      <View style={{ flex: 1 }}>
         <Header 
-          title="Piano Tiles" 
+          title="Rhythm Tiles" 
           onProfilePress={handleProfilePress}
         />
 
-        {/* Songs List */}
         <FlatList
           data={songsData}
           renderItem={({ item }) => (
@@ -85,7 +83,6 @@ export default function HomeScreen({ navigation }) {
           showsVerticalScrollIndicator={false}
         />
 
-        {/* Navigation Footer */}
         <NavFooter navigation={navigation} />
       </View>
     </MainLayout>
