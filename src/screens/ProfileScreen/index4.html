@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Piano Tiles</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="flex justify-center text-4xl text-white font-bold text-center neon-blue-box header2">
+      <!-- image2vector.svg was the conversion for better image manipulation -->
+      <a href="./index4.html">
+        <img src="img/user.png" alt="Profile Photo" width="80" height="80" class="mt-2"/>
+      </a>
+    </header>
+    
+    <main class="mt-5 mb-10">
+      <!-- Player card displaying profile picture, username, level, and level progress -->
+      <div class="flex flex-row m-8 mt-20 gap-3 pl-3 p-1 rounded items-center bg-teal-700"> 
+        
+        <img src="img/user.png" alt="Profile Photo" width="60" height="60" class="bg-neutral-900 p-1 rounded-full"/>
+
+        <div class="flex flex-col">
+          <h1 class="text-4xl">Player123</h1>
+          <div class="flex flex-row gap-3 items-center">
+            <p>Level 23</p>
+
+            <div class="w-45 h-2 bg-teal-600 rounded">
+              <div class="w-27 h-2 bg-teal-300 rounded"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+       
+    <!-- Card displaying some of the users stats (songs played, highest combo, best score, and total stars) -->
+      <div class="flex flex-row m-8 p-3 rounded bg-teal-700">
+
+        <div class="flex-1 flex flex-col">
+
+          <div class="flex flex-col">
+            <p class="text-2xl">1,200</p>
+            <p class="text-xs text-neutral-300">Total songs played</p>
+          </div>
+
+          <div class="flex flex-col">
+            <p class="text-2xl">228</p>
+            <p class="text-xs text-neutral-300">Highest combo</p>
+          </div>
+
+        </div>
+        <div class="flex-1 flex flex-col">
+
+          <div class="flex flex-col">
+            <p class="text-2xl">56,789</p>
+            <p class="text-xs text-neutral-300">Best score ever</p>
+          </div>
+
+          <div class="flex flex-col">
+            <p class="text-2xl">1,234</p>
+            <p class="text-xs text-neutral-300">Total stars earned</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Cards displaying recent activity for the user (just songs for now but maybe can be others later) -->
+      <div class="flex flex-col m-8">
+        <div class="flex flex-row justify-between items-center gap-3 mb-1">
+          <p>Recent Activity</p>
+          <p class="text-sm text-neutral-300">See all</p>
+        </div>
+
+        <div class="flex flex-row items-center gap-3">
+          <div class="flex-1 flex flex-col bg-gradient-to-b from-teal-700 to-teal-500 rounded items-center justify-center p-3">
+            <img src="img/saved_songs_nav.png" alt="SongPhoto" width="50" height="50"/>
+            <p>Song1</p>
+            <p class="text-xs text-neutral-300">Artist1</p>
+          </div>
+
+
+          <div class="flex-1 flex flex-col bg-gradient-to-b from-teal-700 to-teal-500 rounded items-center justify-center p-3">
+            <img src="img/saved_songs_nav.png" alt="SongPhoto" width="50" height="50"/>
+            <p>Song2</p>
+            <p class="text-xs text-neutral-300">Artist2</p>
+          </div>
+
+          <div class="flex-1 flex flex-col bg-gradient-to-b from-teal-700 to-teal-500 rounded items-center justify-center p-3">
+            <img src="img/saved_songs_nav.png" alt="SongPhoto" width="50" height="50"/>
+            <p>Song3</p>
+            <p class="text-xs text-neutral-300">Artist3</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements completed/uncompleted by the user (will have individual icons but cba getting a bunch of images for now) -->
+      <div>
+        <div class="m-8 mb-1 flex flex-row justify-between">
+          <p>Achievements</p>
+          <p class="text-sm text-neutral-300">See all</p>
+        </div>
+
+        <div class="grid grid-cols-6 gap-4 m-8 mt-0">
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+          <div class="bg-teal-900 p-1 rounded"><img src="img/padlock.png" alt="Lock Photo" width="50" height="50"/></div>
+        </div>
+      </div>
+
+
+    </main>
+
+
+    <footer class="footer">
+      <div class="flex justify-center gap-18">
+        <div class="my-auto">
+          <a href="./index.html">
+            <img src="img/song_tab_nav.png" alt="Song Tab" width="70" height="70">
+          </a>
+        </div>
+
+        <div class="my-auto">
+          <a href="./index2.html">
+            <img src="img/saved_songs_nav.png" alt="Saved Songs" width="60" height="60">
+          </a>
+        </div>
+
+        <div>
+          <a href="./index3.html">
+            <img src="img/achievements_nav.png" alt="Achievements" width="80" height="80">
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+  </body>
+</html>
+
+
+
+

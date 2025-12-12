@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rhythm Tiles</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="game.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="flex justify-right text-4xl text-white font-bold text-center neon-blue-box gap-15 sm:gap-0">
+      <a href="./index.html" class="neon-blue-text text w-50 mt-auto mb-4 ml-auto sm:m-auto">
+        <h1 >
+        Piano Tiles
+        </h1>
+      </a>
+
+      <!-- image2vector.svg was the conversion for better image manipulation -->
+      <a href="./index4.html">
+        <img src="img/user.png" alt="Profile Photo" width="50" height="50" class="mt-6"/>
+      </a>
+    </header>
+
+    <!-- Main Game Area -->
+    <main class="mt-10 flex flex-col items-center justify-center">
+      <div id="game-wrapper" 
+           class="relative w-full max-w-[500px] h-[700px] bg-gray-300 overflow-hidden border-4 border-cyan-400 rounded-xl shadow-[0_0_30px_#00ffff80]">
+        <div id="game" class="absolute inset-0 grid grid-cols-4"></div>
+
+        <!-- Overlay UI -->
+        <div id="ui" class="absolute top-3 left-3 text-black font-bold text-lg">
+          <p>Score: <span id="score">0</span></p>
+          <p>Time: <span id="timer">0</span>s</p>
+        </div>
+
+        <!-- Restart Button -->
+        <button id="restartBtn" class="absolute top-3 right-3 px-4 py-2 text-black bg-cyan-400 font-bold rounded-md hover:bg-cyan-500 transition">
+          Restart
+        </button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="flex justify-center gap-18">
+        <div class="my-auto">
+          <a href="./index.html">
+            <img src="img/song_tab_nav.png" alt="Song Tab" width="70" height="70">
+          </a>
+        </div>
+
+        <div class="my-auto">
+          <a href="./index2.html">
+            <img src="img/saved_songs_nav.png" alt="Saved Songs" width="60" height="60">
+          </a>
+        </div>
+
+        <div>
+          <a href="./index3.html">
+            <img src="img/achievements_nav.png" alt="Achievements" width="80" height="80">
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="game.js"></script>
+  </body>
+</html>

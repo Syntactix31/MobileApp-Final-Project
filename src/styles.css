@@ -1,0 +1,257 @@
+.neon-blue-box {
+  background-color: #000000;
+  box-shadow:
+    0 0 5px #04D9FF,
+    0 0 10px #04D9FF,
+    0 0 20px #04D9FF,
+    0 0 40px #00FFFF,
+    0 0 80px #00FFFF;
+}
+
+.neon-blue-text {
+    text-shadow:
+    0 0 5px #04ffee,
+    0 0 10px #04D98a,
+    0 0 20px #04D98a,
+    0 0 40px #00FF8a,
+    0 0 80px #00FF8a;
+}
+
+.z-index {
+  z-index: 500;
+}
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-width: 100vw;
+}
+
+body {
+  background-color: #000000;
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 700;
+  color: white;
+}
+
+
+header {
+  overflow-x: hidden;
+  /* border-bottom: 10px;  might need ts later*/
+  border-bottom-left-radius: 90px;
+  border-bottom-right-radius: 20px;
+}
+
+.header2 {
+  overflow-x: hidden;
+  /* border-bottom: 10px;  might need ts later*/
+  border-bottom-left-radius: 90px;
+  border-bottom-right-radius: 90px;
+}
+
+.main-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.artwork-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.image-placeholder {
+  width: 80px;
+  height: 80px;
+  background-color: rgb(37, 36, 41);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.cd-image-placeholder {
+  width: 75px;
+  height: 75px;
+  background-color: rgb(57, 56, 63);
+  border-radius: 90px;
+  position: absolute;
+  top: 2px;
+  right: -10px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  z-index: 1000;
+  height: 120px;
+}
+
+
+/* Set Nav bar icons theme as:
+       green, blue, and yellow/orange 
+       Neon
+      
+       
+    Add white underline to current selected nav bar icon
+    */
+
+
+
+
+
+
+
+
+
+
+
+/*Achievements Page Styles*/
+:root {
+  --bronze: #cd7f32;
+  --silver: #c0c0c0;
+  --gold: #ffd700;
+  --legendary1: #b56cff;
+  --legendary2: #62e8ff;
+  --chip-bg: rgba(255,255,255,0.06);
+  --chip-active: rgba(4, 217, 255, 0.15);
+  --zinc-900: #0a0a0b;
+}
+
+#achievements-page .btn-claim-all {
+  padding: 0.6rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid #14b8a6;
+  background: rgba(20,184,166,0.1);
+  box-shadow: 0 0 10px rgba(20,184,166,0.4);
+  font-weight: 700;
+  transition: transform .1s ease, background .2s ease;
+}
+#achievements-page .btn-claim-all:hover { transform: translateY(-1px); }
+
+.ach-chips .chip {
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  background: var(--chip-bg);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: .02em;
+}
+.ach-chips .chip-active {
+  background: var(--chip-active);
+  box-shadow: 0 0 10px rgba(4,217,255,0.35);
+  border-color: rgba(4,217,255,0.6);
+}
+
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (max-width: 640px) {
+  .ach-grid { grid-template-columns: 1fr; }
+}
+
+.ach-card {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(20,20,24,0.9), rgba(12,12,16,0.9));
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 0 20px rgba(0,0,0,0.35);
+  transform: translateZ(0);
+}
+.ach-card.claimed-pop { animation: pop .6s ease; }
+@keyframes pop { 0%{transform:scale(.98)} 60%{transform:scale(1.03)} 100%{transform:scale(1)} }
+
+.ach-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  color: white;
+  border: 2px solid rgba(255,255,255,0.12);
+  box-shadow:
+    0 0 8px rgba(255,255,255,0.06),
+    inset 0 0 12px rgba(255,255,255,0.04);
+}
+.ach-icon.tier-bronze { box-shadow: 0 0 10px rgba(205,127,50,0.45); border-color: var(--bronze); }
+.ach-icon.tier-silver { box-shadow: 0 0 10px rgba(192,192,192,0.45); border-color: var(--silver); }
+.ach-icon.tier-gold { box-shadow: 0 0 16px rgba(255,215,0,0.5); border-color: var(--gold); }
+.ach-icon.tier-legendary {
+  border-image: linear-gradient(45deg, var(--legendary1), var(--legendary2)) 1;
+  border-width: 2px;
+  box-shadow: 0 0 16px rgba(181,108,255,0.55), 0 0 26px rgba(98,232,255,0.35);
+}
+.ach-locked { filter: grayscale(0.6) brightness(0.8); opacity: 0.7; }
+.ach-secret { background: radial-gradient(80% 80% at 50% 50%, rgba(98,98,110,0.2), rgba(20,20,24,0.2)); }
+
+.ach-body .ach-title { font-weight: 800; letter-spacing: .02em; }
+.ach-body .ach-desc { font-size: 0.9rem; color: #d1d5db; }
+.ach-body .ach-requirement { font-size: 0.8rem; }
+.ach-body .ach-rewards { margin-top: 6px; display: flex; gap: 8px; flex-wrap: wrap; }
+.ach-body .reward { padding: 2px 8px; border-radius: 9999px; font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.1); }
+.ach-body .reward.ap { background: rgba(0,212,255,0.12); border-color: rgba(0,212,255,0.4); }
+.ach-body .reward.cur { background: rgba(0,255,138,0.12); border-color: rgba(0,255,138,0.35); }
+.ach-body .reward.item { background: rgba(255,215,0,0.10); border-color: rgba(255,215,0,0.35); }
+
+.ach-meta { margin-top: 8px; display: flex; gap: 8px; align-items: center; }
+.pill { padding: 2px 8px; border-radius: 9999px; font-size: 0.7rem; border: 1px solid rgba(255,255,255,0.12); text-transform: uppercase; letter-spacing: .06em; }
+.tier.bronze { background: rgba(205,127,50,0.12); border-color: rgba(205,127,50,0.5); }
+.tier.silver { background: rgba(192,192,192,0.12); border-color: rgba(192,192,192,0.5); }
+.tier.gold { background: rgba(255,215,0,0.12); border-color: rgba(255,215,0,0.5); }
+.tier.legendary { background: linear-gradient(90deg, rgba(181,108,255,0.16), rgba(98,232,255,0.16)); border-color: rgba(181,108,255,0.45); }
+
+.state.unlocked { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.45); }
+.state.locked { background: rgba(244,63,94,0.15); border-color: rgba(244,63,94,0.45); }
+.state.inprogress { background: rgba(234,179,8,0.15); border-color: rgba(234,179,8,0.45); }
+.state.claimable { background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.45); }
+
+/* Progress Bar */
+.ach-progress { display:flex; align-items:center; gap: 8px; margin-top: 8px; }
+.ach-progress .bar { position:relative; height: 8px; border-radius: 8px; background: rgba(255,255,255,0.08); flex: 1; overflow: hidden; }
+.ach-progress .bar .fill { position:absolute; top:0; left:0; height:100%; background: linear-gradient(90deg, #04D9FF, #00FF8a); }
+.ach-progress .label { font-size: 0.75rem; color: #e5e7eb; }
+
+/* Claim button per card */
+.btn-claim {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(4,217,255,0.6);
+  background: rgba(4,217,255,0.12);
+  font-weight: 800;
+  font-size: 0.75rem;
+  transition: transform .12s ease, background .2s ease;
+}
+.btn-claim:hover { transform: translateY(-1px); }
+
+/* Header Box */
+.ach-header {
+  backdrop-filter: blur(6px);
+}
+
+
+/* Material Symbols baseline */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  font-size: 28px;
+  line-height: 1;
+}
+
+

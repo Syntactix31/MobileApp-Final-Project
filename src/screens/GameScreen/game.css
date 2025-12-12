@@ -1,0 +1,48 @@
+#game-wrapper {
+  position: relative;
+  height: 700px;
+  width: 90%;
+  max-width: 500px; 
+  background-color: #d3d3d3;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+@media (max-width: 600px) {
+  #game-wrapper {
+    height: 650px;
+    max-width: 380px;
+  }
+}
+
+/* Tiles */
+.tile {
+  width: 25%;
+  height: 175px;
+  position: absolute;
+  transition: background-color 0.1s ease, transform 0.1s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tile.black {
+  background: linear-gradient(to bottom, #000000, #222222);
+  box-shadow: inset 0 0 10px #00ffff60;
+}
+
+.tile.white {
+  background-color: #d3d3d3;
+}
+
+.tile.clicked {
+  background: #00ffff;
+  box-shadow: 0 0 10px #00ffff, inset 0 0 10px #00ffff;
+  transform: scale(0.98);
+}
+
+footer.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}

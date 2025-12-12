@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Piano Tiles</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="styles.css" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/></head>
+<body>
+<header class="flex justify-right text-4xl text-white font-bold text-center neon-blue-box gap-15 sm:gap-0">
+<a class="neon-blue-text text w-50 mt-auto mb-4 ml-auto sm:m-auto" href="./index.html">
+<h1>
+        Piano Tiles
+        </h1>
+</a>
+<!-- image2vector.svg was the conversion for better image manipulation -->
+<a href="./index4.html">
+<img alt="Profile Photo" height="50" src="img/user.png" width="50" class="mt-6"/>
+</a>
+</header>
+<main class="mt-5 mb-10">
+<section class="container mx-auto px-4 text-white" id="achievements-page">
+<!-- Header Summary -->
+<div class="ach-header mt-6 mb-6 p-4 rounded-xl border border-zinc-700 bg-zinc-900/70 shadow-lg">
+<div class="flex items-center justify-between gap-4 flex-wrap">
+<div>
+<h2 class="text-2xl font-bold tracking-wide neon-blue-text">Achievements</h2>
+<p class="text-sm text-zinc-300">Track your progress, claim rewards, and chase mastery.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-center">
+<div class="text-3xl font-extrabold" id="ach-count">0 / 0</div>
+<div class="text-xs uppercase tracking-wider text-zinc-400">Unlocked</div>
+</div>
+<div class="text-center">
+<div class="text-3xl font-extrabold" id="ap-total">0</div>
+<div class="text-xs uppercase tracking-wider text-zinc-400">Total AP</div>
+</div>
+<button class="btn-claim-all" id="claim-all">Claim All</button>
+</div>
+</div>
+</div>
+<!-- Category Chips -->
+<ul class="ach-chips flex gap-2 flex-wrap mb-4">
+<li><button class="chip chip-active" data-filter="all">All</button></li>
+<li><button class="chip" data-filter="earned">Earned</button></li>
+<li><button class="chip" data-filter="locked">Locked</button></li>
+<li><button class="chip" data-filter="Getting Started">Getting Started</button></li>
+<li><button class="chip" data-filter="Rhythm &amp; Accuracy">Rhythm &amp; Accuracy</button></li>
+<li><button class="chip" data-filter="Combo &amp; Flow">Combo &amp; Flow</button></li>
+<li><button class="chip" data-filter="Mastery &amp; Difficulty">Mastery &amp; Difficulty</button></li>
+<li><button class="chip" data-filter="Collection &amp; Discovery">Collection &amp; Discovery</button></li>
+<li><button class="chip" data-filter="Dedication &amp; Endurance">Dedication &amp; Endurance</button></li>
+<li><button class="chip" data-filter="Competitive &amp; Social">Competitive &amp; Social</button></li>
+<li><button class="chip" data-filter="Secret">Secret</button></li>
+</ul>
+<!-- Grid -->
+<div class="ach-grid pb-20">
+<!-- Getting Started examples -->
+<article class="ach-card" data-ap="100" data-category="Getting Started" data-state="unlocked">
+<div class="ach-icon tier-bronze"><span class="material-symbols-outlined">play_arrow</span></div>
+<div class="ach-body">
+<div class="ach-title">First Beat</div>
+<div class="ach-desc">Finish any song.</div>
+<div class="ach-requirement text-zinc-400">Complete 1 song</div>
+<div class="ach-rewards">
+<span class="reward ap">+100 AP</span>
+<span class="reward cur">+250 Notes</span>
+</div>
+<div class="ach-meta"><span class="tier pill bronze">Bronze</span><span class="state pill unlocked">Unlocked</span></div>
+</div>
+</article>
+<article class="ach-card" data-ap="150" data-category="Getting Started" data-progress="1,3" data-state="claimable">
+<div class="ach-icon tier-bronze"><span class="material-symbols-outlined">queue_music</span></div>
+<div class="ach-body">
+<div class="ach-title">Warm-Up Set</div>
+<div class="ach-desc">Finish 3 unique songs.</div>
+<div class="ach-progress"><div class="bar"><div class="fill" style="width: 33%"></div></div><div class="label">1 / 3</div></div>
+<div class="ach-rewards"><span class="reward ap">+150 AP</span><span class="reward cur">+250 Notes</span></div>
+<div class="ach-meta"><span class="tier pill bronze">Bronze</span><button class="btn-claim">Claim</button></div>
+</div>
+</article>
+<article class="ach-card" data-ap="200" data-category="Getting Started" data-state="locked">
+<div class="ach-icon tier-silver ach-locked"><span class="material-symbols-outlined">speed</span></div>
+<div class="ach-body">
+<div class="ach-title">Speed Taster</div>
+<div class="ach-desc">Finish 1 song at 1.25× or 0.75× speed.</div>
+<div class="ach-rewards"><span class="reward ap">+200 AP</span></div>
+<div class="ach-meta"><span class="tier pill silver">Silver</span><span class="state pill locked">Locked</span></div>
+</div>
+</article>
+<!-- Rhythm & Accuracy -->
+<article class="ach-card" data-ap="200" data-category="Rhythm &amp; Accuracy" data-state="locked">
+<div class="ach-icon tier-silver ach-locked"><span class="material-symbols-outlined">target</span></div>
+<div class="ach-body">
+<div class="ach-title">On the Beat</div>
+<div class="ach-desc">Achieve ≥ 90% accuracy on any song.</div>
+<div class="ach-rewards"><span class="reward ap">+200 AP</span></div>
+<div class="ach-meta"><span class="tier pill silver">Silver</span><span class="state pill locked">Locked</span></div>
+</div>
+</article>
+<article class="ach-card" data-ap="800" data-category="Rhythm &amp; Accuracy" data-state="locked">
+<div class="ach-icon tier-legendary ach-locked"><span class="material-symbols-outlined">stars</span></div>
+<div class="ach-body">
+<div class="ach-title">Studio Perfect</div>
+<div class="ach-desc">SSS (≥99.5%) on any song.</div>
+<div class="ach-rewards"><span class="reward ap">+800 AP</span><span class="reward item">Title: Studio Perfect</span></div>
+<div class="ach-meta"><span class="tier pill legendary">Legendary</span><span class="state pill locked">Locked</span></div>
+</div>
+</article>
+<!-- Combo & Flow -->
+<article class="ach-card" data-ap="150" data-category="Combo &amp; Flow" data-state="unlocked">
+<div class="ach-icon tier-bronze"><span class="material-symbols-outlined">link</span></div>
+<div class="ach-body">
+<div class="ach-title">Chain-50</div>
+<div class="ach-desc">Reach a combo of ≥ 50.</div>
+<div class="ach-rewards"><span class="reward ap">+150 AP</span></div>
+<div class="ach-meta"><span class="tier pill bronze">Bronze</span><span class="state pill unlocked">Unlocked</span></div>
+</div>
+</article>
+<article class="ach-card" data-ap="400" data-category="Combo &amp; Flow" data-state="locked">
+<div class="ach-icon tier-gold ach-locked"><span class="material-symbols-outlined">bolt</span></div>
+<div class="ach-body">
+<div class="ach-title">Chain-300</div>
+<div class="ach-desc">Reach a combo of ≥ 300.</div>
+<div class="ach-rewards"><span class="reward ap">+400 AP</span><span class="reward cur">+600 Notes</span></div>
+<div class="ach-meta"><span class="tier pill gold">Gold</span><span class="state pill locked">Locked</span></div>
+</div>
+</article>
+<!-- Mastery & Difficulty -->
+<article class="ach-card" data-ap="300" data-category="Mastery &amp; Difficulty" data-state="locked">
+<div class="ach-icon tier-gold ach-locked"><span class="material-symbols-outlined">whatshot</span></div>
+<div class="ach-body">
+<div class="ach-title">Expert Initiate</div>
+<div class="ach-desc">Finish 1 Expert song.</div>
+<div class="ach-rewards"><span class="reward ap">+300 AP</span></div>
+<div class="ach-meta"><span class="tier pill gold">Gold</span><span class="state pill locked">Locked</span></div>
+</div>
+</article>
+<!-- Collection & Discovery -->
+<article class="ach-card" data-ap="200" data-category="Collection &amp; Discovery" data-progress="7,10" data-state="progress">
+<div class="ach-icon tier-bronze"><span class="material-symbols-outlined">library_music</span></div>
+<div class="ach-body">
+<div class="ach-title">Crate Digger</div>
+<div class="ach-desc">Finish 10 unique songs.</div>
+<div class="ach-progress"><div class="bar"><div class="fill" style="width: 70%"></div></div><div class="label">7 / 10</div></div>
+<div class="ach-rewards"><span class="reward ap">+200 AP</span></div>
+<div class="ach-meta"><span class="tier pill bronze">Bronze</span><span class="state pill inprogress">In Progress</span></div>
+</div>
+</article>
+<!-- Dedication & Endurance -->
+<article class="ach-card" data-ap="250" data-category="Dedication &amp; Endurance" data-progress="3450,10000" data-state="progress">
+<div class="ach-icon tier-silver"><span class="material-symbols-outlined">touch_app</span></div>
+<div class="ach-body">
+<div class="ach-title">Tap Tally I</div>
+<div class="ach-desc">Accumulate 10,000 taps.</div>
+<div class="ach-progress"><div class="bar"><div class="fill" style="width: 34%"></div></div><div class="label">3,450 / 10,000</div></div>
+<div class="ach-rewards"><span class="reward ap">+250 AP</span></div>
+<div class="ach-meta"><span class="tier pill silver">Silver</span><span class="state pill inprogress">In Progress</span></div>
+</div>
+</article>
+<!-- Competitive & Social -->
+<article class="ach-card" data-ap="200" data-category="Competitive &amp; Social" data-state="locked">
+<div class="ach-icon tier-silver ach-locked"><span class="material-symbols-outlined">leaderboard</span></div>
+<div class="ach-body">
+<div class="ach-title">On the Board</div>
+<div class="ach-desc">Submit a score to any global leaderboard.</div>
+<div class="ach-rewards"><span class="reward ap">+200 AP</span></div>
+<div class="ach-meta"><span class="tier pill silver">Silver</span><span class="state pill locked">Locked</span></div>
+</div>
+</article>
+<!-- Secret -->
+<article class="ach-card secret" data-ap="400" data-category="Secret" data-state="locked">
+<div class="ach-icon tier-gold ach-secret"><span class="material-symbols-outlined">help</span></div>
+<div class="ach-body">
+<div class="ach-title">???</div>
+<div class="ach-desc">A hidden challenge awaits.</div>
+<div class="ach-rewards"><span class="reward ap">+400 AP</span></div>
+<div class="ach-meta"><span class="tier pill gold">Secret</span><span class="state pill locked">Hidden</span></div>
+</div>
+</article>
+</div>
+</section>
+<script>
+// Simple client-side behavior: filter chips, claim buttons, totals
+(function() {
+  const $ = (s, r=document)=> r.querySelector(s);
+  const $$ = (s, r=document)=> Array.from(r.querySelectorAll(s));
+
+  const cards = $$('.ach-card');
+  const apTotalEl = $('#ap-total');
+  const achCountEl = $('#ach-count');
+  const claimAllBtn = $('#claim-all');
+
+  function updateHeader() {
+    const total = cards.length;
+    const unlocked = cards.filter(c => ['unlocked','claimable'].includes(c.dataset.state)).length;
+    achCountEl.textContent = unlocked + ' / ' + total;
+
+    // Sum AP for unlocked
+    const ap = cards.reduce((sum, c) => {
+      const st = c.dataset.state;
+      if (st === 'unlocked') return sum + (+c.dataset.ap || 0);
+      return sum;
+    }, 0);
+    apTotalEl.textContent = ap;
+  }
+
+  function setState(card, newState) {
+    card.dataset.state = newState;
+    const statePill = card.querySelector('.state');
+    const claimBtn = card.querySelector('.btn-claim');
+    if (newState === 'unlocked') {
+      if (statePill) { statePill.textContent = 'Unlocked'; statePill.className = 'state pill unlocked'; }
+      if (claimBtn) { claimBtn.remove(); }
+      const icon = card.querySelector('.ach-icon');
+      if (icon) icon.classList.remove('ach-locked');
+    } else if (newState === 'claimable') {
+      if (statePill) { statePill.textContent = 'Claimable'; statePill.className = 'state pill claimable'; }
+    }
+  }
+
+  // Hook up chip filters
+  $$('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      $$('.chip').forEach(c => c.classList.remove('chip-active'));
+      chip.classList.add('chip-active');
+      const filter = chip.dataset.filter;
+      cards.forEach(card => {
+        const state = card.dataset.state;
+        const cat = card.dataset.category;
+        let show = true;
+        if (filter === 'earned') show = (state === 'unlocked' || state === 'claimable');
+        else if (filter === 'locked') show = (state === 'locked' || state === 'progress');
+        else if (filter !== 'all') show = (cat === filter);
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // Claim buttons
+  $$('.btn-claim').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.ach-card');
+      setState(card, 'unlocked');
+      updateHeader();
+      // celebrate
+      card.classList.add('claimed-pop');
+      setTimeout(() => card.classList.remove('claimed-pop'), 600);
+    });
+  });
+
+  // Claim all
+  if (claimAllBtn) {
+    claimAllBtn.addEventListener('click', () => {
+      $$('.ach-card[data-state="claimable"]').forEach(card => setState(card, 'unlocked'));
+      updateHeader();
+    });
+  }
+
+  updateHeader();
+})();
+</script>
+</main>
+<footer class="footer">
+<div class="flex justify-center gap-18">
+<div class="my-auto">
+<a href="./index.html">
+<img alt="Song Tab" height="70" src="img/song_tab_nav.png" width="70"/>
+</a>
+</div>
+<div class="my-auto">
+<a href="./index2.html">
+<img alt="Saved Songs" height="60" src="img/saved_songs_nav.png" width="60"/>
+</a>
+</div>
+<div>
+<a href="./index3.html">
+<img alt="Achievements" height="80" src="img/achievements_nav.png" width="80"/>
+</a>
+</div>
+</div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
