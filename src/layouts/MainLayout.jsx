@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaContext } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
-const MainLayout = ({ children }) => {
+export default function MainLayout({ children }) {
   return (
-    <SafeAreaContext style={styles.body}>
+    <SafeAreaView style={styles.body}>
       <View style={styles.header}>
         <Text style={[styles.neonBlueText, styles.headerTitle]}>
           Rhythm Tiles
@@ -11,18 +11,20 @@ const MainLayout = ({ children }) => {
       </View>
 
       <View style={styles.mainContainer}>
-        <View style={styles.artworkContainer}>
+
+        {children}
+        {/* <View style={styles.artworkContainer}>
           <View style={styles.imagePlaceholder} />
           <View style={styles.cdImagePlaceholder} />
         </View>
 
-        <View style={styles.content}>{children}</View>
+        <View style={styles.content}>{children}</View> */}
       </View>
 
       <View style={styles.footer}>
         <Text style={styles.footerText}>Footer content</Text>
       </View>
-    </SafeAreaContext>
+    </SafeAreaView>
   );
 };
 
@@ -134,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainLayout;
+

@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 // screens/HomeScreen.jsx
 import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 
 import MainLayout from '../layouts/MainLayout';
 import Header from '../layouts/Header';
@@ -9,6 +9,12 @@ import NavFooter from '../layouts/NavFooter';
 
 import SongItem from '../components/SongItem';
 
+const styles = StyleSheet.create({
+  listContainer: {
+    paddingHorizontal: 16,
+    paddingBottom: 140,
+  },
+});
 
 const songsData = [
   { id: '1', title: 'Song #1', credits: 'Credits' },
@@ -86,26 +92,26 @@ export default function HomeScreen({ navigation }) {
   );
 }
 
-const styles = {
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    marginBottom: 20,
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  profileIcon: {
-    width: 50,
-    height: 50,
-  },
-  listContainer: {
-    paddingHorizontal: 16,
-    paddingBottom: 140,
-  },
-};
+// const styles = {
+//   header: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     paddingHorizontal: 20,
+//     paddingVertical: 16,
+//     marginBottom: 20,
+//   },
+//   headerTitle: {
+//     fontSize: 24,
+//     fontWeight: 'bold',
+//     color: 'white',
+//   },
+//   profileIcon: {
+//     width: 50,
+//     height: 50,
+//   },
+//   listContainer: {
+//     paddingHorizontal: 16,
+//     paddingBottom: 140,
+//   },
+// };
