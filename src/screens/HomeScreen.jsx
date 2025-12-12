@@ -13,7 +13,6 @@ export default function HomeScreen() {
     <MainLayout>
       <Button
           title="Saved Songs"
-          
           onPress={() => navigation.navigate('SavedSongs')}
       />    
 
