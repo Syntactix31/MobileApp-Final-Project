@@ -4,7 +4,7 @@ import MainLayout from '../layouts/MainLayout.jsx';
 import { useColorScheme } from 'react-native';
 
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const isDarkMode = useColorScheme() === 'dark';
 
 

@@ -6,7 +6,7 @@ import MainLayout from '../layouts/MainLayout';
 
 
 
-export default function SavedSongsScreen() {
+export default function SavedSongsScreen({ navigation }) {
   const currentDate = new Date().toLocaleDateString();
 
   return (
