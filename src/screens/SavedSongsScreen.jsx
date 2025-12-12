@@ -12,8 +12,8 @@ export default function SavedSongsScreen({ navigation }) {
   return (
     <MainLayout>
       <View style={styles.content}>
-        <Text style={styles.title}>ToDo App</Text>
-        <Text style={styles.text}>Developer: Levi M</Text>
+        <Text style={styles.title}>Rythm Tiles</Text>
+        <Text style={styles.text}>Developers: Levi M, Theo S, Jiro R, Justice M</Text>
         <Text style={styles.text}>Date: {currentDate}</Text>
         <Button
           title="Go to Home"
