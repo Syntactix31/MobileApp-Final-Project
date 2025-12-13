@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 90,
     marginHorizontal: 20,
   },
-
+  
   listContent: {
     paddingHorizontal: 16,
     paddingBottom: 140,
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
   listContainer: {
     paddingHorizontal: 16,
     paddingBottom: 140,
-    marginBottom: 200,
   },
   contentContainer: {
     flex: 1,

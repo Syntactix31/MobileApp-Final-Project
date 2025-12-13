@@ -1,3 +1,5 @@
+/***** ENVIRONMENT INSTALLATION PROCEDURES *****\
+
 # npm req
 npm install @react-navigation/native @react-navigation/native-stack
 

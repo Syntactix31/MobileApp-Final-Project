@@ -1,0 +1,1 @@
+// NOTE: Song list functionality moved to SongItem for simplicty and cleaner code
