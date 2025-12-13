@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
@@ -171,9 +172,15 @@ export default function GameScreen({ navigation }) {
 
   // RENDER 
 
+  const handleProfilePress = () => {
+    console.log('Profile pressed');
+    navigation.navigate('Profile');
+
+  };
+
   return (
     <MainLayout>
-      <Header title="Piano Tiles" />
+      <Header title="Rhythm Tiles" onProfilePress={handleProfilePress}/>
 
       <View style={styles.wrapper}>
         <Text style={styles.ui}>Score: {score}</Text>

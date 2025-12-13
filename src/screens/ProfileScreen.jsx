@@ -21,9 +21,7 @@ export default function ProfileScreen({ navigation }) {
   return (
     <MainLayout>
       <View style={{ flex: 1 }}>
-        <Text>
-          Profile Stuff
-        </Text>
+
 
 
         <NavFooter navigation={navigation} />

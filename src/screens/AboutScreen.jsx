@@ -26,10 +26,20 @@ export default function SavedSongsScreen({ navigation }) {
           onProfilePress={handleProfilePress}
         />
 
+        <Text style={styles.title}>Rhythm Tiles</Text>
+        <Text style={styles.text}>Developers: Levi M, Theo S, Jiro R, Justice M</Text>
+        <Text style={styles.text}>Date: {currentDate}</Text>
+
+
         <NavFooter navigation={navigation} />
       </View>
     </MainLayout>
   );
 }
 
+const styles = StyleSheet.create({
+  content: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 },
+  text: { fontSize: 16, marginBottom: 10, },
+});
 

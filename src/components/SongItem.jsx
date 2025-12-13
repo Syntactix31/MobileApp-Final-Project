@@ -71,7 +71,7 @@ const styles = {
     position: 'absolute',
     top: 0,
     left: 0,
-    zIndex: 1,
+    zIndex: 2,
   },
 
   cdImagePlaceholder: {
@@ -82,6 +82,7 @@ const styles = {
     position: 'absolute',
     top: 2,
     right: -16,
+    zIndex: 1,
   },
 
   songInfo: {

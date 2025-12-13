@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import Header from '../layouts/Header';
 
 export default function MainLayout({ children }) {
   return (
@@ -39,8 +40,8 @@ export const layoutStyles = StyleSheet.create({
     shadowColor: '#04D9FF',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
-    shadowRadius: 20,
-    elevation: 20,
+    shadowRadius: 30,
+    elevation: 30,
   },
 
   neonBlueText: {
@@ -97,7 +98,7 @@ export const layoutStyles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    zIndex: 1,
+    zIndex: 2,
   },
 
   cdImagePlaceholder: {
@@ -108,6 +109,7 @@ export const layoutStyles = StyleSheet.create({
     position: 'absolute',
     top: 2,
     right: -16,
+    zIndex: 1,
   },
 
   content: {

@@ -4,7 +4,7 @@ import { layoutStyles } from '../layouts/MainLayout';
 
 export default function Header({ title, onProfilePress }) {
   return (
-    <View style={[layoutStyles.header, styles.container]}>
+    <View style={[layoutStyles.header, layoutStyles.neonBlueBox, layoutStyles.zIndexHigh, styles.container]}>
       <View style={styles.titleContainer}>
         <Text 
         style={[layoutStyles.neonBlueText, layoutStyles.headerTitle, styles.title]}>
@@ -28,11 +28,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
+    // paddingHorizontal: 20,
+    // paddingVertical: 16,
     marginTop: 45,
     marginBottom: 10,
-    padding: 10,
+    // padding: 10,
   },
 
   titleContainer: {

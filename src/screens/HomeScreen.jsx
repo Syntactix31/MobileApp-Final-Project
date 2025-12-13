@@ -63,7 +63,7 @@ export default function HomeScreen({ navigation }) {
     <MainLayout>
       <View style={{ flex: 1 }}>
         <Header 
-          title="Piano Tiles" 
+          title="Rhythm Tiles" 
           onProfilePress={handleProfilePress}
         />
 
