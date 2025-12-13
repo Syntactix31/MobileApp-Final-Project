@@ -5,6 +5,10 @@ import { layoutStyles } from '../layouts/MainLayout';
 export default function Header({ title, onProfilePress }) {
   return (
     <View style={[layoutStyles.header, layoutStyles.neonBlueBox, layoutStyles.zIndexHigh, styles.container]}>
+
+      <View style={styles.curvedBorder} />
+
+      
       <View style={styles.titleContainer}>
         <Text 
         style={[layoutStyles.neonBlueText, layoutStyles.headerTitle, styles.title]}>
@@ -28,12 +32,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // paddingHorizontal: 20,
-    // paddingVertical: 16,
     marginTop: 45,
     marginBottom: 10,
-    // padding: 10,
+
+    // These styles will change how the header looks I think the side ones look the best
+    borderLeftWidth: 2,
+    // borderWidth: 2, (for all sides)
+    // borderTopWidth: 2,
+
+    borderRightWidth: 2,
+    // borderBottomWidth: 2,
+    borderBottomLeftRadius: 30,
+    borderColor: '#00ffff', 
+    backgroundColor: 'transparent',
+
+
+
   },
+
+
 
   titleContainer: {
     flex: 1,
