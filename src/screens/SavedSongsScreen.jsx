@@ -68,9 +68,14 @@ export default function SavedSongsScreen({ navigation, savedSongs, toggleSave, l
     ...combinedSongs.filter(song => song.isSaved).map(song => ({ ...song, type: 'saved' })),
   ];
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item, index }) => {
     if (item.type === 'header') {
-      return <Text style={styles.sectionTitle}>{item.title}</Text>;
+      const isPlaylistHeader = item.title === 'Playlist #1';
+      const hasLikedSongsAbove = likedSongs.length > 0;
+      
+      return <Text style={[styles.sectionTitle, isPlaylistHeader && hasLikedSongsAbove && { marginTop: 15}]}>
+        {item.title}
+      </Text>;
     }
 
     return (
