@@ -16,21 +16,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function HomeScreen({ navigation, songsData, savedSongs, toggleSave }) {
-  const [likedSongs, setLikedSongs] = useState([]);
+export default function HomeScreen({ navigation, songsData, savedSongs, toggleSave, likedSongs, toggleLike }) {
 
   const handleProfilePress = () => {
     console.log('Profile pressed');
     navigation.navigate('Profile');
 
-  };
-
-  const toggleLike = (songId) => {
-    setLikedSongs(prev => 
-      prev.includes(songId) 
-        ? prev.filter(id => id !== songId)
-        : [...prev, songId]
-    );
   };
 
   const playSong = () => {
@@ -50,9 +41,9 @@ export default function HomeScreen({ navigation, songsData, savedSongs, toggleSa
           renderItem={({ item }) => (
             <SongItem
               song={item}
-              isLiked={likedSongs.includes(item.id)}
+              isLiked={likedSongs.some((s) => s.id === item.id)}
               isSaved={savedSongs.some((s) => s.id === item.id)}
-              onLike={() => toggleLike(item.id)}
+              onLike={() => toggleLike(item)}
               onSave={() => toggleSave(item)}
               onPress={playSong}
             />

@@ -33,8 +33,19 @@ const songsData = [
 export default function App() {
   const [savedSongs, setSavedSongs] = useState([]);
 
+  const [likedSongs, setLikedSongs] = useState([]);
+  
+
   const toggleSave = (song) => {
     setSavedSongs((prev) =>
+      prev.find((s) => s.id === song.id)
+        ? prev.filter((s) => s.id !== song.id)
+        : [...prev, song]
+    );
+  };
+  
+  const toggleLike = (song) => {
+    setLikedSongs((prev) =>
       prev.find((s) => s.id === song.id)
         ? prev.filter((s) => s.id !== song.id)
         : [...prev, song]
@@ -52,6 +63,8 @@ export default function App() {
               songsData={songsData}
               savedSongs={savedSongs}
               toggleSave={toggleSave}
+              likedSongs={likedSongs}
+              toggleLike={toggleLike}
             />
           )}
         </Stack.Screen>
@@ -61,6 +74,9 @@ export default function App() {
               {...props}
               savedSongs={savedSongs}
               toggleSave={toggleSave}
+              likedSongs={likedSongs}
+              toggleLike={toggleLike} 
+              allSongs={songsData} 
             />
           )}
         </Stack.Screen>
