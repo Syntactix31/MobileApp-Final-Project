@@ -56,7 +56,7 @@ export default function HomeScreen({ navigation }) {
   };
 
   const playSong = () => {
-    navigation.navigate('Game'); // Jiro to replace with gamescreen
+    navigation.navigate('GameScreen');
   };
 
   return (

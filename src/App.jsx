@@ -24,7 +24,7 @@ export default function App() {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="SavedSongs" component={SavedSongsScreen} />
-        <Stack.Screen name="Game" component={GameScreen} />
+        <Stack.Screen name="GameScreen" component={GameScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Achievements" component={AchievementsScreen} />
       </Stack.Navigator>

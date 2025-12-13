@@ -3,6 +3,6 @@
   "compilerOptions": {
     "types": ["jest"],
   },
-  "include": ["**/*.js", "**/*.sjx", "src/App.jsx"],
+  "include": ["**/*.js", "**/*.sjx", "src/App.jsx", "src/screens/GameScreen/GameScreen.jsx"],
   "exclude": ["**/node_modules", "**/Pods"]
 }
