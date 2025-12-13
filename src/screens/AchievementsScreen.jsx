@@ -24,7 +24,7 @@ export default function AchievementsScreen({ navigation }) {
     <MainLayout>
       <View style={{ flex: 1 }}>
         <Header 
-          title="Rhythm Tiles" 
+          title="Achievements" 
           onProfilePress={handleProfilePress}
         />
 

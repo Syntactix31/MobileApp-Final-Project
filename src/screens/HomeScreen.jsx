@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 // screens/HomeScreen.jsx
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, FlatList, Image } from 'react-native';
 
 import MainLayout from '../layouts/MainLayout';
 import Header from '../layouts/Header';
 import NavFooter from '../layouts/NavFooter';
-
 import SongItem from '../components/SongItem';
+
 
 const styles = StyleSheet.create({
   listContainer: {
@@ -16,22 +16,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const songsData = [
-  { id: '1', title: 'Song #1', credits: 'Credits' },
-  { id: '2', title: 'Song #2', credits: 'Credits' },
-  { id: '3', title: 'Song #3', credits: 'Credits' },
-  { id: '4', title: 'Song #4', credits: 'Credits' },
-  { id: '5', title: 'Song #5', credits: 'Credits' },
-  { id: '6', title: 'Song #6', credits: 'Credits' },
-  { id: '7', title: 'Song #7', credits: 'Credits' },
-  { id: '8', title: 'Song #8', credits: 'Credits' },
-  { id: '9', title: 'Song #9', credits: 'Credits' },
-  { id: '10', title: 'Song #10', credits: 'Credits' },
-];
-
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, songsData, savedSongs, toggleSave }) {
   const [likedSongs, setLikedSongs] = useState([]);
-  const [savedSongs, setSavedSongs] = useState([]);
 
   const handleProfilePress = () => {
     console.log('Profile pressed');
@@ -42,14 +28,6 @@ export default function HomeScreen({ navigation }) {
   const toggleLike = (songId) => {
     setLikedSongs(prev => 
       prev.includes(songId) 
-        ? prev.filter(id => id !== songId)
-        : [...prev, songId]
-    );
-  };
-
-  const toggleSave = (songId) => {
-    setSavedSongs(prev => 
-      prev.includes(songId)
         ? prev.filter(id => id !== songId)
         : [...prev, songId]
     );
@@ -73,9 +51,9 @@ export default function HomeScreen({ navigation }) {
             <SongItem
               song={item}
               isLiked={likedSongs.includes(item.id)}
-              isSaved={savedSongs.includes(item.id)}
+              isSaved={savedSongs.some((s) => s.id === item.id)}
               onLike={() => toggleLike(item.id)}
-              onSave={() => toggleSave(item.id)}
+              onSave={() => toggleSave(item)}
               onPress={playSong}
             />
           )}
