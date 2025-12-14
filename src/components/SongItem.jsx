@@ -13,7 +13,7 @@ export default function SongItem({ song, isLiked, isSaved, onLike, onSave, onPre
 
       <View style={styles.songInfo}>
         <Text style={styles.songTitle}>{song.title}</Text>
-        <Text style={styles.credits}>Credits</Text>
+        <Text style={styles.credits}>{song.credits}</Text>
       </View>
 
       <View style={styles.actionButtons}>

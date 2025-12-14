@@ -12,6 +12,8 @@ export default function WelcomeScreen({ navigation }) {
 
   const [startButtonSound, setStartButtonSound] = useState(null);
 
+  const [isPianoActive, setIsPianoActive] = useState(false);
+
 
 
   useEffect(() => {
@@ -55,17 +57,17 @@ export default function WelcomeScreen({ navigation }) {
 
 
   const handleStartPress = () => {
-
-    if (startButtonSound && startButtonSound.isLoaded()) {
-      startButtonSound.play((success) => {
-        if (!success) {
-          console.log('Start sound playback failed');
-        }
-      });
-    }
-
-
     if (welcomeSound) {
+
+      if (startButtonSound && startButtonSound.isLoaded()) {
+        startButtonSound.play((success) => {
+          if (!success) {
+            console.log('Start sound playback failed');
+          }
+        });
+      }
+
+
       welcomeSound.stop();
       welcomeSound.release();
 
@@ -75,6 +77,10 @@ export default function WelcomeScreen({ navigation }) {
     console.log('Start pressed - Welcome audio stopped');
     navigation.navigate('Home');
 
+  };
+
+  const handlePianoPress = () => {
+    setIsPianoActive(!isPianoActive);
   };
 
 
@@ -91,10 +97,17 @@ export default function WelcomeScreen({ navigation }) {
             Rhythm Tiles
           </Text>        
         </View>
-
-
-
       </View>
+
+        <TouchableOpacity onPress={handlePianoPress}>
+          <Image 
+            source={isPianoActive 
+              ? require('../assets/img/neonpiano.jpg') 
+              : require('../assets/img/neonpiano2.jpg')} 
+            style={styles.pianoImage} 
+          />
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={handleStartPress} style={styles.startContainer}>
           <Text style={styles.start}>
             Start            
@@ -110,8 +123,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 300,
-    marginBottom: 400,
+    marginTop: 250,
+    marginBottom: 70,
     marginHorizontal: 'auto',
     width: 300,
     height: 300,
@@ -154,13 +167,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 'auto',
-  },
+    },
 
   title: {
     fontSize: 36,
   },
 
+  pianoImage: {
+    width: 200,
+    height: 200,
+    marginHorizontal: 'auto',
+    marginTop: 20,
+    marginBottom: 150,
+    padding: 10,
+
+  },
+
 });
+
+
 
 
 

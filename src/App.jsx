@@ -27,16 +27,16 @@ Sound.setCategory('Playback');
 const Stack = createNativeStackNavigator();
 
 const songsData = [
-  { id: '1', title: 'Song #1', credits: 'Credits' },
-  { id: '2', title: 'Song #2', credits: 'Credits' },
-  { id: '3', title: 'Song #3', credits: 'Credits' },
-  { id: '4', title: 'Song #4', credits: 'Credits' },
-  { id: '5', title: 'Song #5', credits: 'Credits' },
-  { id: '6', title: 'Song #6', credits: 'Credits' },
-  { id: '7', title: 'Song #7', credits: 'Credits' },
-  { id: '8', title: 'Song #8', credits: 'Credits' },
-  { id: '9', title: 'Song #9', credits: 'Credits' },
-  { id: '10', title: 'Song #10', credits: 'Credits' },
+  { id: '1', title: 'Smooth Moves', credits: 'LNDO' },
+  { id: '2', title: 'Ephemeral Colours', credits: 'Moments' },
+  { id: '3', title: 'Soft Return', credits: 'Moments' },
+  { id: '4', title: 'Just a Dream', credits: 'CJ-0' },
+  { id: '5', title: 'Jovial Walk', credits: 'Elbroar' },
+  { id: '6', title: 'The Last Prelude', credits: 'Moments' },
+  { id: '7', title: 'Viva la Mamma', credits: 'Elbroar' },
+  { id: '8', title: 'Starlit Galaxy', credits: 'Chronos' },
+  { id: '9', title: 'Love Again', credits: 'Liberty' },
+  { id: '10', title: 'Skin Symphony ', credits: 'Andrewball' },
 ];
 
 
