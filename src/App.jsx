@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+
 import HomeScreen from './screens/HomeScreen.jsx';
 import SavedSongsScreen from './screens/SavedSongsScreen.jsx';
 import GameScreen from './screens/GameScreen.jsx';
@@ -15,6 +16,8 @@ import AchievementsScreen from './screens/AchievementsScreen.jsx';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+
+import { AppState } from 'react-native';
 import Sound from 'react-native-sound';
 
 Sound.setCategory('Playback');
@@ -35,32 +38,60 @@ const songsData = [
   { id: '10', title: 'Song #10', credits: 'Credits' },
 ];
 
+
 export default function App() {
   const [savedSongs, setSavedSongs] = useState([]);
-
   const [likedSongs, setLikedSongs] = useState([]);
 
+  const [bgSound, setBgSound] = useState(null);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+
+  
   useEffect(() => {
+    let sound = null;
+    
     Sound.setCategory('Playback');
-    const bgSound = new Sound('background1.wav', Sound.MAIN_BUNDLE, (error) => {
+    sound = new Sound('background1.wav', Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         console.log('Failed to load background sound', error);
         return;
       }
-      bgSound.setNumberOfLoops(-1);
-      bgSound.play((success) => {
-        if (!success) console.log('Playback failed');
+      setBgSound(sound);
+      sound.setNumberOfLoops(-1);
+      sound.play((success) => {
+        if (success) setIsMusicPlaying(true);
       });
     });
 
     return () => {
-      if (bgSound) {
-        bgSound.stop();
-        bgSound.release();
+      if (sound?.isLoaded()) {
+        sound.stop();
+        sound.release();
+      }
+      setBgSound(null);
+      setIsMusicPlaying(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState) => {
+      if (nextAppState === 'background') {
+        if (bgSound) {
+          bgSound.stop();
+          bgSound.release();
+          setBgSound(null);
+          setIsMusicPlaying(false);
+        }
       }
     };
-  }, []);  
-  
+
+    const subscription = AppState.addEventListener('change', handleAppStateChange);
+
+    return () => {
+      subscription?.remove();
+    };
+  }, [bgSound]);
+
 
   const toggleSave = (song) => {
     setSavedSongs((prev) =>
@@ -108,7 +139,17 @@ export default function App() {
           )}
         </Stack.Screen>
 
-        <Stack.Screen name="GameScreen" component={GameScreen} />
+        <Stack.Screen name="GameScreen">
+          {(props) => (
+            <GameScreen 
+              {...props} 
+              bgSound={bgSound}
+              isMusicPlaying={isMusicPlaying}
+              setIsMusicPlaying={setIsMusicPlaying}
+            />
+          )}
+        </Stack.Screen>
+
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Achievements" component={AchievementsScreen} />
       </Stack.Navigator>

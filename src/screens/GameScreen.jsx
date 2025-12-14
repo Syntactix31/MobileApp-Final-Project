@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import MainLayout from '../layouts/MainLayout';
 import Header from '../layouts/Header';
@@ -18,7 +19,7 @@ const COLS = 4;
 const ROWS_ON_SCREEN = Math.ceil(SCREEN_HEIGHT / TILE_HEIGHT) + 2;
 const INITIAL_SPEED = 5;
 
-export default function GameScreen({ navigation }) {
+export default function GameScreen({ navigation, bgSound, isMusicPlaying, setIsMusicPlaying }) {
   const [rows, setRows] = useState([]);
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(0);
@@ -177,6 +178,24 @@ export default function GameScreen({ navigation }) {
     navigation.navigate('Profile');
 
   };
+
+  useFocusEffect(
+    useCallback(() => {  
+      if (bgSound && isMusicPlaying) {
+        bgSound.pause(() => {
+          setIsMusicPlaying(false);
+        });
+      }
+      
+      return () => {
+        if (bgSound && !isMusicPlaying) {
+          bgSound.play((success) => {
+            if (success) setIsMusicPlaying(true);
+          });
+        }
+      };
+    }, [bgSound, isMusicPlaying, setIsMusicPlaying])
+  );
 
   return (
     <MainLayout>
