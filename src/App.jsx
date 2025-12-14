@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HomeScreen from './screens/HomeScreen.jsx';
 import SavedSongsScreen from './screens/SavedSongsScreen.jsx';
 import GameScreen from './screens/GameScreen.jsx';
@@ -14,6 +14,11 @@ import AchievementsScreen from './screens/AchievementsScreen.jsx';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Sound from 'react-native-sound';
+
+Sound.setCategory('Playback');
+
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +39,27 @@ export default function App() {
   const [savedSongs, setSavedSongs] = useState([]);
 
   const [likedSongs, setLikedSongs] = useState([]);
+
+  useEffect(() => {
+    Sound.setCategory('Playback');
+    const bgSound = new Sound('background1.wav', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('Failed to load background sound', error);
+        return;
+      }
+      bgSound.setNumberOfLoops(-1);
+      bgSound.play((success) => {
+        if (!success) console.log('Playback failed');
+      });
+    });
+
+    return () => {
+      if (bgSound) {
+        bgSound.stop();
+        bgSound.release();
+      }
+    };
+  }, []);  
   
 
   const toggleSave = (song) => {
@@ -51,6 +77,7 @@ export default function App() {
         : [...prev, song]
     );
   };
+
 
   return (
     <NavigationContainer>

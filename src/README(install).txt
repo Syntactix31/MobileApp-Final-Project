@@ -9,6 +9,8 @@ npm install react-native-gesture-handler react-native-safe-area-context react-na
 # npm req
 npm install react-native-linear-gradient
 
+# npm req
+npm install react-native-sound
 
 # npm
 npm start -- --reset-cache

@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#00ffff',
     borderTopLeftRadius: 90,
     borderTopRightRadius: 90,
-    marginHorizontal: 20,
+    marginHorizontal: 5,
+    marginTop: 10,
   },
   
   listContent: {
@@ -68,7 +69,7 @@ export default function SavedSongsScreen({ navigation, savedSongs, toggleSave, l
     ...combinedSongs.filter(song => song.isSaved).map(song => ({ ...song, type: 'saved' })),
   ];
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({ item }) => {
     if (item.type === 'header') {
       const isPlaylistHeader = item.title === 'Playlist #1';
       const hasLikedSongsAbove = likedSongs.length > 0;
