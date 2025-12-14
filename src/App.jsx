@@ -7,6 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 
+import WelcomeScreen from './screens/WelcomeScreen.jsx';
 import HomeScreen from './screens/HomeScreen.jsx';
 import SavedSongsScreen from './screens/SavedSongsScreen.jsx';
 import GameScreen from './screens/GameScreen.jsx';
@@ -45,22 +46,25 @@ export default function App() {
 
   const [bgSound, setBgSound] = useState(null);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [homeLoaded, setHomeLoaded] = useState(false); 
 
   
   useEffect(() => {
     let sound = null;
     
     Sound.setCategory('Playback');
-    sound = new Sound('background1.wav', Sound.MAIN_BUNDLE, (error) => {
+    sound = new Sound('background2.wav', Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         console.log('Failed to load background sound', error);
         return;
       }
       setBgSound(sound);
       sound.setNumberOfLoops(-1);
-      sound.play((success) => {
-        if (success) setIsMusicPlaying(false);
-      });
+
+      // Audio wait fro homescreen
+      // sound.play((success) => {
+      //   if (success) setIsMusicPlaying(false);
+      // });
     });
 
     return () => {
@@ -69,28 +73,18 @@ export default function App() {
         sound.release();
       }
       setBgSound(null);
-      setIsMusicPlaying(false);
+
+      // setIsMusicPlaying(false);
     };
   }, []);
 
   useEffect(() => {
-    const handleAppStateChange = (nextAppState) => {
-      if (nextAppState === 'background') {
-        if (bgSound) {
-          bgSound.stop();
-          bgSound.release();
-          setBgSound(null);
-          setIsMusicPlaying(false);
-        }
-      }
-    };
-
-    const subscription = AppState.addEventListener('change', handleAppStateChange);
-
-    return () => {
-      subscription?.remove();
-    };
-  }, [bgSound]);
+    if (homeLoaded && bgSound && !isMusicPlaying) {
+      bgSound.play((success) => {
+        if (success) setIsMusicPlaying(true);
+      });
+    }
+  }, [homeLoaded, bgSound, isMusicPlaying]);
 
 
   const toggleSave = (song) => {
@@ -113,6 +107,17 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false, animation: 'none',}}>
+        <Stack.Screen name="Welcome" options={{ 
+              animation: 'fade',
+              animationDuration: 1100 
+            }}>
+          {(props) => (
+            <WelcomeScreen
+              {...props}
+              
+            />
+          )}
+        </Stack.Screen>        
 
         <Stack.Screen name="Home">
           {(props) => (
@@ -123,6 +128,8 @@ export default function App() {
               toggleSave={toggleSave}
               likedSongs={likedSongs}
               toggleLike={toggleLike}
+              setHomeLoaded={setHomeLoaded}
+              
             />
           )}
         </Stack.Screen>

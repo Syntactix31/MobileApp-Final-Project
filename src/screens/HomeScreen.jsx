@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 // screens/HomeScreen.jsx
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, FlatList, Image } from 'react-native';
 
 import MainLayout from '../layouts/MainLayout';
@@ -16,7 +16,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function HomeScreen({ navigation, songsData, savedSongs, toggleSave, likedSongs, toggleLike }) {
+export default function HomeScreen({ navigation, songsData, savedSongs, toggleSave, likedSongs, toggleLike, setHomeLoaded  }) {
+
+  useEffect(() => {
+    setHomeLoaded?.(true);
+    
+    return () => setHomeLoaded?.(false);
+  }, [setHomeLoaded]);
 
   const handleProfilePress = () => {
     console.log('Profile pressed');
