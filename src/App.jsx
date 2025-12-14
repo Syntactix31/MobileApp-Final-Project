@@ -59,7 +59,7 @@ export default function App() {
       setBgSound(sound);
       sound.setNumberOfLoops(-1);
       sound.play((success) => {
-        if (success) setIsMusicPlaying(true);
+        if (success) setIsMusicPlaying(false);
       });
     });
 

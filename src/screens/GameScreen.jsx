@@ -19,7 +19,7 @@ const COLS = 4;
 const ROWS_ON_SCREEN = Math.ceil(SCREEN_HEIGHT / TILE_HEIGHT) + 2;
 const INITIAL_SPEED = 5;
 
-export default function GameScreen({ navigation, bgSound, isMusicPlaying, setIsMusicPlaying }) {
+export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
   const [rows, setRows] = useState([]);
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(0);
@@ -180,21 +180,27 @@ export default function GameScreen({ navigation, bgSound, isMusicPlaying, setIsM
   };
 
   useFocusEffect(
-    useCallback(() => {  
-      if (bgSound && isMusicPlaying) {
-        bgSound.pause(() => {
-          setIsMusicPlaying(false);
-        });
+    useCallback(() => {
+      if (bgSound) {
+        bgSound.pause();
+        setIsMusicPlaying(false);
       }
-      
+
       return () => {
-        if (bgSound && !isMusicPlaying) {
+
+        if (bgSound) {
+          
+          // NOTE: To restart bg music from beginning on re-render
+          bgSound.setCurrentTime(0);
+
           bgSound.play((success) => {
-            if (success) setIsMusicPlaying(true);
+            if (success) {
+              setIsMusicPlaying(true);
+            }
           });
         }
       };
-    }, [bgSound, isMusicPlaying, setIsMusicPlaying])
+    }, [bgSound, setIsMusicPlaying])
   );
 
   return (
