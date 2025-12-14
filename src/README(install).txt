@@ -12,6 +12,9 @@ npm install react-native-linear-gradient
 # npm req
 npm install react-native-sound
 
+# npm req
+npm install react-native-async-storage/async-storage
+
 # npm
 npm start -- --reset-cache
 
