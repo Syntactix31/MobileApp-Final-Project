@@ -8,7 +8,7 @@ import NavFooter from '../layouts/NavFooter';
 export default function ProfileScreen({ navigation }) {
 
   // Move profile to middle of header and remove title
-
+  // Also include exit/signout button to welcome screen
 
 
 

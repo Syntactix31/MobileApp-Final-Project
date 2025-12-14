@@ -10,6 +10,10 @@ export default function WelcomeScreen({ navigation }) {
 
   const [welcomeSound, setWelcomeSound] = useState(null);
 
+  const [startButtonSound, setStartButtonSound] = useState(null);
+
+
+
   useEffect(() => {
     Sound.setCategory('Playback');
     const sound = new Sound('background1.wav', Sound.MAIN_BUNDLE, (error) => {
@@ -30,15 +34,41 @@ export default function WelcomeScreen({ navigation }) {
     };
   }, []);
 
+  useEffect(() => {
+    const sound = new Sound('gamestart.mp3', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('Start sound failed:', error);
+        return;
+      }
+      sound.setNumberOfLoops(0);
+      setStartButtonSound(sound);
+    });
 
+    return () => {
+      if (sound?.isLoaded()) {
+        sound.stop();
+        sound.release();
+      }
+    };
+  }, []);
 
 
 
   const handleStartPress = () => {
 
+    if (startButtonSound && startButtonSound.isLoaded()) {
+      startButtonSound.play((success) => {
+        if (!success) {
+          console.log('Start sound playback failed');
+        }
+      });
+    }
+
+
     if (welcomeSound) {
       welcomeSound.stop();
       welcomeSound.release();
+
       setWelcomeSound(null);
     }
 
