@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import MainLayout from '../layouts/MainLayout';
 import Header from '../layouts/Header';
@@ -19,6 +20,9 @@ const COLS = 4;
 const ROWS_ON_SCREEN = Math.ceil(SCREEN_HEIGHT / TILE_HEIGHT) + 2;
 const INITIAL_SPEED = 5;
 
+// same key used in AchievementsScreen
+const STATS_KEY = 'rhythmTilesStats';
+
 export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
   const [rows, setRows] = useState([]);
   const [score, setScore] = useState(0);
@@ -26,14 +30,18 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
   const [gameOver, setGameOver] = useState(false);
   const [flash, setFlash] = useState(null);
   const [gameStarted, setGameStarted] = useState(false);
-  
+
   const speedRef = useRef(INITIAL_SPEED);
   const gameLoop = useRef(null);
   const timerLoop = useRef(null);
   const nextRowId = useRef(0);
 
-  // ROW CREATION
-  
+  // keep latest score/time for saving
+  const scoreRef = useRef(0);
+  const timeRef = useRef(0);
+
+  // ---------------- ROW CREATION ----------------
+
   const createRow = (y, id) => ({
     id,
     y,
@@ -43,11 +51,8 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
 
   const initRows = () => {
     const startRows = [];
-    // Create rows starting from the bottom of the screen
-    // The first row should be at the bottom had problems with this
     for (let i = 0; i < ROWS_ON_SCREEN; i++) {
-      // Position rows so the bottom row is at the bottom of the screen
-      const y = SCREEN_HEIGHT - TILE_HEIGHT - (i * TILE_HEIGHT);
+      const y = SCREEN_HEIGHT - TILE_HEIGHT - i * TILE_HEIGHT;
       startRows.push(createRow(y, i));
     }
     nextRowId.current = ROWS_ON_SCREEN;
@@ -55,11 +60,18 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
   };
 
   const startGame = () => {
-    if (!gameStarted) {
-      setGameStarted(true);
-      gameLoop.current = setInterval(moveRows, 16);
-      timerLoop.current = setInterval(() => setTime(t => t + 1), 1000);
-    }
+    if (gameStarted) return;
+    setGameStarted(true);
+
+    gameLoop.current = setInterval(moveRows, 16);
+
+    timerLoop.current = setInterval(() => {
+      setTime((t) => {
+        const updated = t + 1;
+        timeRef.current = updated;
+        return updated;
+      });
+    }, 1000);
   };
 
   const initGame = () => {
@@ -67,6 +79,8 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
     setRows(initialRows);
     setScore(0);
     setTime(0);
+    scoreRef.current = 0;
+    timeRef.current = 0;
     setGameOver(false);
     setGameStarted(false);
     speedRef.current = INITIAL_SPEED;
@@ -75,10 +89,38 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
     clearInterval(timerLoop.current);
   };
 
-  // ROW MOVEMENT
+  // ---------------- STATS SYNC ----------------
+
+  const updateStatsOnGameOver = async (finalScore, finalTime) => {
+    try {
+      const json = await AsyncStorage.getItem(STATS_KEY);
+      const prev = json
+        ? JSON.parse(json)
+        : {
+            totalGamesPlayed: 0,
+            bestScore: 0,
+            bestTimeSurvived: 0,
+            totalTilesHit: 0,
+          };
+
+      const newStats = {
+        totalGamesPlayed: prev.totalGamesPlayed + 1,
+        bestScore: Math.max(prev.bestScore, finalScore),
+        bestTimeSurvived: Math.max(prev.bestTimeSurvived, finalTime),
+        totalTilesHit: prev.totalTilesHit + finalScore,
+      };
+
+      await AsyncStorage.setItem(STATS_KEY, JSON.stringify(newStats));
+      console.log('Stats updated:', newStats);
+    } catch (error) {
+      console.log('Error updating stats', error);
+    }
+  };
+
+  // ---------------- ROW MOVEMENT ----------------
 
   const moveRows = () => {
-    setRows(prev => {
+    setRows((prev) => {
       const newRows = [];
       let missedBlack = false;
 
@@ -86,14 +128,13 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
         let row = { ...prev[i] };
         const newY = row.y + speedRef.current;
 
-        // Check if black tile is missed when it reaches the bottom
+        // missed black tile at bottom
         if (newY >= SCREEN_HEIGHT && !row.hit && row.black !== undefined) {
           missedBlack = true;
         }
 
-        // If row is completely off screen (bottom), recycle it to top
         if (newY >= SCREEN_HEIGHT) {
-          // Find the highest row (smallest y value)
+          // recycle row to the top
           let highestY = Infinity;
           for (let j = 0; j < newRows.length; j++) {
             if (newRows[j].y < highestY) highestY = newRows[j].y;
@@ -101,8 +142,7 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
           for (let j = i + 1; j < prev.length; j++) {
             if (prev[j].y < highestY) highestY = prev[j].y;
           }
-          
-          // Place new row exactly TILE_HEIGHT above the highest row
+
           const newYPosition = highestY - TILE_HEIGHT;
           row = createRow(newYPosition, nextRowId.current++);
         } else {
@@ -111,7 +151,6 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
         newRows.push(row);
       }
 
-      // Sort rows by y position
       newRows.sort((a, b) => a.y - b.y);
 
       if (missedBlack) {
@@ -122,46 +161,54 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
     });
   };
 
-  // INPUT HANDLING 
+  // ---------------- INPUT HANDLING ----------------
 
   const onTilePress = (rowId, col) => {
     if (gameOver) return;
-    
-    // Start game on first tile press
+
     if (!gameStarted) {
       startGame();
     }
 
-    setRows(prev =>
-      prev.map(row => {
+    setRows((prev) =>
+      prev.map((row) => {
         if (row.id !== rowId) return row;
 
-        // Correct tile (black and not hit)
+        // correct black tile
         if (row.black === col && !row.hit) {
-          setScore(s => s + 1);
+          setScore((s) => {
+            const updated = s + 1;
+            scoreRef.current = updated;
+            return updated;
+          });
           speedRef.current += 0.1;
           return { ...row, hit: true };
         }
 
-        // Wrong tile (not black OR already hit black)
+        // wrong tile
         setFlash({ rowId, col });
         setTimeout(() => setFlash(null), 200);
         setTimeout(() => endGame(), 200);
-        
+
         return row;
-      })
+      }),
     );
   };
 
-  // GAME END
+  // ---------------- GAME END ----------------
 
   const endGame = () => {
     if (gameOver) return;
-    
+
     setGameOver(true);
     clearInterval(gameLoop.current);
     clearInterval(timerLoop.current);
+
+    // use refs so we always save latest values
+    updateStatsOnGameOver(scoreRef.current, timeRef.current);
   };
+
+  // ---------------- LIFECYCLE ----------------
 
   useEffect(() => {
     initGame();
@@ -171,12 +218,9 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
     };
   }, []);
 
-  // RENDER 
-
   const handleProfilePress = () => {
     console.log('Profile pressed');
     navigation.navigate('Profile');
-
   };
 
   useFocusEffect(
@@ -187,10 +231,7 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
       }
 
       return () => {
-
         if (bgSound) {
-          
-          // NOTE: To restart bg music from beginning on re-render
           bgSound.setCurrentTime(0);
 
           bgSound.play((success) => {
@@ -200,12 +241,14 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
           });
         }
       };
-    }, [bgSound, setIsMusicPlaying])
+    }, [bgSound, setIsMusicPlaying]),
   );
+
+  // ---------------- RENDER ----------------
 
   return (
     <MainLayout>
-      <Header title="Rhythm Tiles" onProfilePress={handleProfilePress}/>
+      <Header title="Rhythm Tiles" onProfilePress={handleProfilePress} />
 
       <View style={styles.wrapper}>
         <Text style={styles.ui}>Score: {score}</Text>
@@ -217,20 +260,19 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
           <View style={[styles.verticalLine, { left: '75%' }]} />
         </View>
 
-        {rows.map(row => {
-          // Only render rows that are visible
+        {rows.map((row) => {
           const isVisible = row.y > -TILE_HEIGHT && row.y < SCREEN_HEIGHT;
           if (!isVisible) return null;
-          
+
           return (
-            <View 
-              key={row.id} 
+            <View
+              key={row.id}
               style={[
-                styles.row, 
-                { 
+                styles.row,
+                {
                   top: row.y,
                   height: TILE_HEIGHT,
-                }
+                },
               ]}
             >
               {[...Array(COLS)].map((_, col) => {
@@ -276,8 +318,6 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
     </MainLayout>
   );
 }
-
-/* ---------------- STYLES ---------------- */
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -361,4 +401,3 @@ const styles = StyleSheet.create({
     color: '#000',
   },
 });
-
