@@ -20,7 +20,9 @@ const GAME_AREA_HEIGHT = WINDOW_HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT - 40;
 const SCREEN_HEIGHT = GAME_AREA_HEIGHT;
 const COLS = 4;
 const ROWS_ON_SCREEN = Math.ceil(SCREEN_HEIGHT / TILE_HEIGHT) + 2;
-const INITIAL_SPEED = 5;
+const INITIAL_SPEED = 8;
+const SPEED_RAMP_START_TIME = 5;
+const MAX_SPEED = 20; 
 
 // same key used in AchievementsScreen
 const STATS_KEY = 'rhythmTilesStats';
@@ -70,7 +72,15 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
       gameMusic.play((success) => {
         if (!success) console.log('Game music playback failed');
       });
-    }  
+
+      gameMusic.setNumberOfLoops(0); 
+      const checkMusicEnd = setInterval(() => {
+          if (gameMusic && gameMusic.isLoaded() && !gameMusic.isPlaying()) {
+            clearInterval(checkMusicEnd);
+            endGame();
+          }
+        }, 100);
+    }
 
     gameLoop.current = setInterval(moveRows, 16);
 
@@ -193,7 +203,7 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
             scoreRef.current = updated;
             return updated;
           });
-          speedRef.current += 0.1;
+          // speedRef.current += 0.1;
           return { ...row, hit: true };
         }
 
@@ -206,6 +216,29 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
       }),
     );
   };
+
+  useEffect(() => {
+    if (!gameStarted || gameOver) return;
+
+    const updateSpeed = () => {
+      if (timeRef.current >= SPEED_RAMP_START_TIME) {
+        // Gradually increase speed after ramp start time
+        const timeElapsed = timeRef.current - SPEED_RAMP_START_TIME;
+        speedRef.current = Math.min(
+          INITIAL_SPEED + (timeElapsed * 0.15), // Increase 0.15 per second
+          MAX_SPEED
+        );
+      } else {
+        // Keep initial speed until ramp time
+        speedRef.current = INITIAL_SPEED;
+      }
+    };
+      const interval = setInterval(updateSpeed, 1000);
+      
+      return () => clearInterval(interval);
+  }, [gameStarted, gameOver, time]);
+
+
 
   // ---------------- GAME END ----------------
 
@@ -236,7 +269,7 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
 
   useEffect(() => {
     Sound.setCategory('Playback');
-    const sound = new Sound('song1.wav', Sound.MAIN_BUNDLE, (error) => {
+    const sound = new Sound('song2.wav', Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         console.log('Game music failed to load:', error);
         return;
