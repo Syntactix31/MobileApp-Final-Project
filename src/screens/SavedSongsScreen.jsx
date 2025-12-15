@@ -86,7 +86,7 @@ export default function SavedSongsScreen({ navigation, savedSongs, toggleSave, l
         isSaved={item.isSaved || item.type === 'saved'}
         onLike={() => toggleLike(item)}
         onSave={() => toggleSave(item)}
-        onPress={() => navigation.navigate('GameScreen')}
+        onPress={(song) => navigation.navigate(('GameScreen'), {selectedSongId: song.id })}
       />
     );
   };

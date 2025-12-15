@@ -30,8 +30,8 @@ export default function HomeScreen({ navigation, songsData, savedSongs, toggleSa
 
   };
 
-  const playSong = () => {
-    navigation.navigate('GameScreen');
+  const playSong = (song) => {
+    navigation.navigate('GameScreen', { selectedSongId: song.id });
   };
 
   return (

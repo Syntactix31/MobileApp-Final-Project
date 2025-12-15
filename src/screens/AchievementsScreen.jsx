@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import MainLayout from '../layouts/MainLayout';
@@ -42,6 +42,22 @@ export default function AchievementsScreen({ navigation }) {
     const unsubscribe = navigation.addListener('focus', loadStats);
     return unsubscribe;
   }, [navigation]);
+
+  const resetAchievements = async () => {
+    try {
+      await AsyncStorage.removeItem(STATS_KEY);
+      setStats({
+        totalGamesPlayed: 0,
+        bestScore: 0,
+        bestTimeSurvived: 0,
+        totalTilesHit: 0,
+      });
+      console.log('Achievements reset!');
+    } catch (error) {
+      console.log('Reset failed:', error);
+    }
+  };
+
 
   const achievements = [
     {
@@ -179,7 +195,13 @@ export default function AchievementsScreen({ navigation }) {
             </View>
           </View>
 
-          {achievements.map(renderAchievement)}
+          {achievements.map(renderAchievement)}  
+
+          <Pressable style={styles.resetButton} onPress={resetAchievements}>
+            <Text style={styles.resetText}>Reset All Stats</Text>
+          </Pressable>          
+
+
         </ScrollView>
 
         <NavFooter navigation={navigation} />
@@ -279,5 +301,21 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 999,
     backgroundColor: '#00ffff',
+  },
+  resetButton: {
+    backgroundColor: 'transparent',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 50,
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#ff4444',
+    marginTop: 15,
+  },
+  resetText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

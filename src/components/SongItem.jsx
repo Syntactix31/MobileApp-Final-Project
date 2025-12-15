@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 export default function SongItem({ song, isLiked, isSaved, onLike, onSave, onPress }) {
   return (
-    <TouchableOpacity style={styles.songContainer} onPress={onPress} activeOpacity={0.7}>
+    <TouchableOpacity style={styles.songContainer} onPress={() => onPress(song)} activeOpacity={0.7}>
       <View style={styles.artworkContainer}>
         <View style={styles.whiteGlow} /> 
         <Image source={song.imageUrl} style={styles.imagePlaceholder} resizeMode="cover" />

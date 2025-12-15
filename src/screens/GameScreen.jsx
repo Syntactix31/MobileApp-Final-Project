@@ -27,7 +27,7 @@ const MAX_SPEED = 20;
 // same key used in AchievementsScreen
 const STATS_KEY = 'rhythmTilesStats';
 
-export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
+export default function GameScreen({ navigation, bgSound, setIsMusicPlaying, route }) {
   const [rows, setRows] = useState([]);
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(0);
@@ -44,6 +44,24 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
   const scoreRef = useRef(0);
   const timeRef = useRef(0);
   const [gameMusic, setGameMusic] = useState(null);
+
+  const selectedSongId = route?.params?.selectedSongId || '2';
+
+  const getSongFileName = (songId) => {
+    const songFiles = {
+      '1': 'song1.wav',
+      '2': 'song2.wav',
+      '3': 'song3.wav',
+      '4': 'song4.wav',
+      '5': 'song5.mp3',
+      '6': 'song6.wav',
+      '7': 'song7.wav',
+      '8': 'song8.mp3',
+      '9': 'song9.wav',
+      '10': 'song10.wav',
+    };
+    return songFiles[songId] || 'song2.wav';
+  };
 
   // ---------------- ROW CREATION ----------------
 
@@ -269,7 +287,8 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
 
   useEffect(() => {
     Sound.setCategory('Playback');
-    const sound = new Sound('song2.wav', Sound.MAIN_BUNDLE, (error) => {
+    const songFile = getSongFileName(selectedSongId);
+    const sound = new Sound(songFile, Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         console.log('Game music failed to load:', error);
         return;
@@ -283,7 +302,10 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
         sound.release();
       }
     };
-  }, []);
+  }, [selectedSongId]);
+
+  console.log('Selected song ID:', selectedSongId, 'File:', getSongFileName(selectedSongId));
+
 
 
   const handleProfilePress = () => {
