@@ -94,7 +94,7 @@ export const layoutStyles = StyleSheet.create({
   imagePlaceholder: {
     width: 80,
     height: 80,
-    backgroundColor: 'rgb(37, 36, 41)',
+    // backgroundColor: 'rgb(37, 36, 41)',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -104,13 +104,30 @@ export const layoutStyles = StyleSheet.create({
   cdImagePlaceholder: {
     width: 75,
     height: 75,
-    backgroundColor: 'rgb(57, 56, 63)',
-    borderRadius: 90,
+    backgroundColor: '#7d7d64ff', 
+    borderRadius: 37.5, 
     position: 'absolute',
     top: 2,
     right: -16,
-    zIndex: 1,
+    zIndex: 2,
   },
+
+  whiteGlow: {
+    width: 88,    
+    height: 80,    
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    borderRadius: 44,
+    top: -4,      
+    left: 8,
+    zIndex: 1,    
+    shadowColor: '#FFFFFF',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.9,
+    shadowRadius: 15,
+    elevation: 20,
+  },
+
 
   content: {
     marginTop: 16,

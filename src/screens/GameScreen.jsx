@@ -9,6 +9,8 @@ import MainLayout from '../layouts/MainLayout';
 import Header from '../layouts/Header';
 import NavFooter from '../layouts/NavFooter';
 
+import Sound from 'react-native-sound';
+
 const { height: WINDOW_HEIGHT } = Dimensions.get('window');
 
 const TILE_HEIGHT = 160;
@@ -39,6 +41,7 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
   // keep latest score/time for saving
   const scoreRef = useRef(0);
   const timeRef = useRef(0);
+  const [gameMusic, setGameMusic] = useState(null);
 
   // ---------------- ROW CREATION ----------------
 
@@ -63,6 +66,12 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
     if (gameStarted) return;
     setGameStarted(true);
 
+    if (gameMusic && gameMusic.isLoaded()) {
+      gameMusic.play((success) => {
+        if (!success) console.log('Game music playback failed');
+      });
+    }  
+
     gameLoop.current = setInterval(moveRows, 16);
 
     timerLoop.current = setInterval(() => {
@@ -75,6 +84,9 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
   };
 
   const initGame = () => {
+    if (gameMusic && gameMusic.isLoaded()) {
+      gameMusic.stop();
+    }
     const initialRows = initRows();
     setRows(initialRows);
     setScore(0);
@@ -199,6 +211,10 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
 
   const endGame = () => {
     if (gameOver) return;
+    
+    if (gameMusic && gameMusic.isLoaded()) {
+      gameMusic.stop();
+    }
 
     setGameOver(true);
     clearInterval(gameLoop.current);
@@ -217,6 +233,25 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying }) {
       clearInterval(timerLoop.current);
     };
   }, []);
+
+  useEffect(() => {
+    Sound.setCategory('Playback');
+    const sound = new Sound('song1.wav', Sound.MAIN_BUNDLE, (error) => {
+      if (error) {
+        console.log('Game music failed to load:', error);
+        return;
+      }
+      setGameMusic(sound);
+    });
+
+    return () => {
+      if (sound?.isLoaded()) {
+        sound.stop();
+        sound.release();
+      }
+    };
+  }, []);
+
 
   const handleProfilePress = () => {
     console.log('Profile pressed');
