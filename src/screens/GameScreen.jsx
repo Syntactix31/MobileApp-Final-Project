@@ -58,7 +58,7 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying, rou
       '7': 'song7.wav',
       '8': 'song8.mp3',
       '9': 'song9.wav',
-      '10': 'song10.wav',
+      '10': 'background1.wav',
     };
     return songFiles[songId] || 'song2.wav';
   };
@@ -291,7 +291,17 @@ export default function GameScreen({ navigation, bgSound, setIsMusicPlaying, rou
     const sound = new Sound(songFile, Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         console.log('Game music failed to load:', error);
+
+        const fallbackSound = new Sound('song2.wav', Sound.MAIN_BUNDLE, (fbError) => {
+          if (fbError) {
+            console.log('Fallback song2.wav also failed:', fbError);
+            return;
+          }
+          console.log('Loaded fallback song2.wav');
+          setGameMusic(fallbackSound);
+        });
         return;
+        
       }
       setGameMusic(sound);
     });
